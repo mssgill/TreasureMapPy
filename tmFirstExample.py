@@ -1,4 +1,11 @@
-# from treasuremap.treasuremap import Pointings
+# MSSG, 6-22-2020 -- based on code in the orig TreasureMap bin dir from @ddobie
+# This is an example taking one of our desgw pointing files from the 2-24-2020 event, and just 
+# inserting 2 of the actual pointings into the file below, using actual coords for the first pointing
+# I changed below: band and the coords for the pointing from HA and dec to RA and dec (looking up 
+# the astropy documentation for SkyCoord)
+# At the end it properly seems to print all the contents of 'request'
+# Note it doesn't actually submit/upload anything to the real TreasureMap DB because i don't specify any URLs here
+# Those are needed inside the treasuremap module to do real uploads
 
 import treasuremap
 
