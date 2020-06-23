@@ -1,2 +1,1 @@
-# VAST-treasuremap
-Automate uploads of VAST observations to treasuremap.space
+# This is a clone of the TreasureMap repo
