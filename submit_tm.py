@@ -57,7 +57,7 @@ if options.test:
 
 # API token - Get your own by making a TreasureMap account
 try:
-    API_TOKEN = glob.glob('api_tokens/{}/*.api_token')[0].split('/')[-1].split('.')[0]
+    API_TOKEN = glob.glob('api_tokens/{}/*.api_token'.format(USERNAME))[0].split('/')[-1].split('.')[0]
     logging.debug("[" + USERNAME + "] " + "API_TOKEN set to {}".format(API_TOKEN))
 except IndexError:
     logging.error("[" + USERNAME + "] " + "Unable to find user-specific API_TOKEN")
