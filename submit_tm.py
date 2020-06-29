@@ -6,6 +6,7 @@ import glob
 import json
 import logging
 from optparse import OptionParser
+import os
 import sys
 sys.path.append('treasuremap')
 
@@ -16,8 +17,18 @@ from treasuremap import Pointings
 # Get username of user
 USERNAME = getpass.getuser()
 
+# Get the time for stamping the log files
+time = datetime.dateime.now()
+
 # Set up logging
-logging.basicConfig(filename="submit_tm.log",
+log_dir = "logs/{}/".format(time.strftime("%y%m%d_%H%M%S"))
+rc = os.system("mkdir " + log_dir)
+if rc != 0:
+    print("Unable to make log directory " + log_dir)
+    print("Check your user's write permissions or make the directory manually")
+    sys.exit()
+
+logging.basicConfig(filename=log_dir + "submit_{}.log".format(time.strftime("%y%m%d_%H%M%S")),
                     filemode="a+",
                     format="|%(levelname)s\t| %(asctime)s -- %(message)s",
                     datefmt="20%y-%m-%d %I:%M:%S %p",
@@ -155,9 +166,8 @@ if not options.test:
     logging.info("[" + USERNAME + "] " + "Finished submisison")
 
     # Save pointings
-    time = datetime.datetime.now()
     logging.info("[" + USERNAME + "] " + "Saving submission pointings")
-    pointing_filename = "pointings_{}.json".format(time.strftime("%y%m%d_%H%M%S")) 
+    pointing_filename = log_dir + "pointings.json"
     pointing_file = open(pointing_filename, 'w+')
     logging.debug("[" + USERNAME + "] " + "pointing file set to {}".format(pointing_filename))
 
@@ -169,7 +179,7 @@ if not options.test:
 
     # Save requests
     logging.info("[" + USERNAME + "] " + "Saving submission requests")
-    request_filename = 'requests_{}.json'.format(time.strftime("%y%m%d_%H%M%S"))
+    request_filename = log_dir + 'requests.json'
     request_file = open(request_filename, 'w+')
     logging.debug("[" + USERNAME + "] " + "request file set to {}".format(request_filename))
     
@@ -189,3 +199,4 @@ else:
 # Conclude the program
 logging.info("[" + USERNAME + "] " + "Progam finished")
 logging.shutdown()
+
