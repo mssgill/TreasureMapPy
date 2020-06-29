@@ -154,11 +154,21 @@ if not options.test:
             logging.warning("[" + USERNAME + "] " + "The {} band pointings may not have submitted properly".format(flt))
     logging.info("[" + USERNAME + "] " + "Finished submisison")
 
-    # Save 
+    # Save pointings
+    time = datetime.datetime.now()
+    logging.info("[" + USERNAME + "] " + "Saving submission pointings")
+    pointing_filename = "pointings_{}.json".format(time.strftime("%y%m%d_%H%M%S")) 
+    pointing_file = open(pointing_filename, 'w+')
+    logging.debug("[" + USERNAME + "] " + "pointing file set to {}".format(pointing_filename))
+
+    for flt in pointings.keys():
+        pointing_file.write(json.dumps(pointings[flt], indent=4))
+        pointing_file.write('\n\n')
+
+        logging.info("[" + USERNAME + "] " + "Wrote pointings for {} band".format(flt))
 
     # Save requests
     logging.info("[" + USERNAME + "] " + "Saving submission requests")
-    time = datetime.datetime.now()
     request_filename = 'requests_{}.json'.format(time.strftime("%y%m%d_%H%M%S"))
     request_file = open(request_filename, 'w+')
     logging.debug("[" + USERNAME + "] " + "request file set to {}".format(request_filename))
@@ -168,6 +178,11 @@ if not options.test:
         request_file.write('\n\n')
         
         logging.info("[" + USERNAME + "] " + "Wrote requests for {} band".format(flt))
+
+    # Close open file streams
+    request_file.close()
+    pointing_file.close()
+
 else:
     logging.info("[" + USERNAME + "] " + "Skipping submission process due to --test argument")
 
