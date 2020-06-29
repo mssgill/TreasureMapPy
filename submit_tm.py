@@ -21,7 +21,7 @@ USERNAME = getpass.getuser()
 time = datetime.dateime.now()
 
 # Set up logging
-log_dir = "logs/{}/".format(time.strftime("%y%m%d_%H%M%S"))
+log_dir = "logs/{}/".format(time.strftime("%y-%m-%d_%H-%M-%S"))
 rc = os.system("mkdir " + log_dir)
 if rc != 0:
     print("Unable to make log directory " + log_dir)
