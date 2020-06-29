@@ -1,0 +1,11 @@
+# Emacs buffer files
+*~
+
+# Usage logs
+logs/
+
+# Treasuremap
+treasuremap/
+
+# API tokens
+api_tokens/
