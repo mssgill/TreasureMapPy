@@ -20,7 +20,7 @@ USERNAME = getpass.getuser()
 logging.basicConfig(filename="submit_tm.log",
                     filemode="a+",
                     format="|%(levelname)s\t| %(asctime)s -- %(message)s",
-                    datefmt="%y%m%d %I:%M:%S %p",
+                    datefmt="20%y-%m-%d %I:%M:%S %p",
                     level=logging.DEBUG)
 logging.info("[" + USERNAME + "] " + "submit_tm.py started")
 logging.debug("[" + USERNAME + "] " + "program command: " + ' '.join(sys.argv))
@@ -154,10 +154,12 @@ if not options.test:
             logging.warning("[" + USERNAME + "] " + "The {} band pointings may not have submitted properly".format(flt))
     logging.info("[" + USERNAME + "] " + "Finished submisison")
 
+    # Save 
+
     # Save requests
     logging.info("[" + USERNAME + "] " + "Saving submission requests")
-    time = datatime.datetime.now()
-    request_filename = 'requests_{%y%m%d_%H%M%S}.json'.foramt(time)
+    time = datetime.datetime.now()
+    request_filename = 'requests_{}.json'.format(time.strftime("%y%m%d_%H%M%S"))
     request_file = open(request_filename, 'w+')
     logging.debug("[" + USERNAME + "] " + "request file set to {}".format(request_filename))
     
