@@ -62,6 +62,15 @@ logging.debug("[" + USERNAME + "] " + "--infile set to {}".format(options.infile
 logging.debug("[" + USERNAME + "] " + "--graceid set to {}".format(options.graceid))
 logging.debug("[" + USERNAME + "] " + "--preview set to {}".format(options.preview))
 logging.debug("[" + USERNAME + "] " + "--test set to {}".format(options.test))
+
+# Copy the infile to the log directory
+logging.info("[" + USERNAME + "] " + "Copying infile to log directory")
+rc = os.system("cp {} ".format(options.infile) + log_dir)
+if rc == 0:
+    logging.debug("[" + USERNAME + "] " + "Copy was successful")
+else:
+    logging.warning("[" + USERNAME + "] " + "Copy FAILED")
+
 if options.test:
     options.preview = True
     logging.info("[" + USERNAME + "] " + "Setting --preview to True for testing")
