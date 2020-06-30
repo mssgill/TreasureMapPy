@@ -1,4 +1,5 @@
 # A script to submit DECam pointings to Treasure Map
+# Authors: R. Morgan and M. Gill
 
 import datetime
 import getpass
