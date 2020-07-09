@@ -16,7 +16,8 @@ import json
 
 import datetime as dt
 
-
+import requests
+ 
 
 # Set up instrument parameters
 graceid = "TEST_EVENT"
@@ -66,6 +67,25 @@ request = S200224.submit()
 print(request["pointing_ids"])
 
 print(request)
+
+
+########## doi
+
+BASE = 'http://treasuremap.space/api/v0/'
+TARGET = 'request_doi'
+
+json_data = {
+    "api_token":'k1M5prGNpnN00RGBHM-Q7LKikAu3RtLTnUjRBQ',
+    "graceid":"TEST_EVENT",
+    "creators":[
+        {"name":"MG", "affiliation":"KIPAC"},
+        {"name":"RM", "affiliation":"FNAL"}
+    ]
+}
+
+r = requests.post(url = BASE+TARGET, json = json_data)
+
+print(r.text)
 
 # Cancel the first pointing
 #cancel_id = request["pointing_ids"][0]
