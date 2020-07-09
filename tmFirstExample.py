@@ -21,17 +21,17 @@ import requests
 
 # Set up instrument parameters
 graceid = "TEST_EVENT"
-instrumentid = 65
+instrumentid = 38
 band = 'i'
 depth_unit = 'flux_jy'
 
 # Set up pointing parameters
-S200224_coord = SkyCoord(165.112931, -0.03382 , frame="icrs",  unit="deg")
+S200224_coord = SkyCoord(153.112931, -0.03382 , frame="icrs",  unit="deg")
 
 
 obs_start = [
-    "2020-02-24T14:10:27",
-    "2020-02-24T08:10:27"]
+    "2020-06-24T14:10:27",
+    "2020-06-24T08:10:27"]
 
 
 obs_length = [
@@ -46,7 +46,7 @@ ra = S200224_coord.ra.deg
 dec = S200224_coord.dec.deg
 
 # Initialise Pointings class
-S200224 = treasuremap.Pointings("planned", graceid, instrumentid, band)
+S200224 = treasuremap.Pointings("completed", graceid, instrumentid, band)
 
 # Loop over each observation and add to Pointings
 for start, dur, rms in zip(obs_start, obs_length, rms_vals):
@@ -77,11 +77,17 @@ TARGET = 'request_doi'
 json_data = {
     "api_token":'k1M5prGNpnN00RGBHM-Q7LKikAu3RtLTnUjRBQ',
     "graceid":"TEST_EVENT",
-    "creators":[
-        {"name":"MG", "affiliation":"KIPAC"},
-        {"name":"RM", "affiliation":"FNAL"}
-    ]
+    "doi_group_id":6
+    
 }
+
+
+'''
+"creators":[
+        {"name":"MG", "affiliation":"Kipac"},
+        {"name":"RM", "affiliation":"UW Madison"}
+    ]
+'''
 
 r = requests.post(url = BASE+TARGET, json = json_data)
 
